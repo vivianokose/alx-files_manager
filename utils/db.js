@@ -1,16 +1,21 @@
 // utils/db.js
 
 import { MongoClient } from 'mongodb';
-//import { process } from 'process';
 
-class DBClient {  
+class DBClient {
+
+  // instantiates DBclient
   constructor() {  
     const host = process.env.DB_HOST || 'localhost';  
     const port = process.env.DB_PORT || 27017;  
-    const url = `mongodb://${host}:${port}`;  
     const database = process.env.DB_DATABASE || 'file_manager';  
+    const url = `mongodb://${host}:${port}/${database}`;  
 
-    this.client = new MongoClient(url);
+    this.client = new MongoClient(url, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    });
+
     this.client.connect((err) => {
       if (err) {
         console.log(`MongoDb client not connected to server: ${err}`);
@@ -19,11 +24,19 @@ class DBClient {
 
     this.db = this.client.db(database);
   }
-    
+
+
+  /**
+   * Checks if database connection is active
+   */
 
   isAlive() {  
     return this.client.isConnected();  
   }  
+
+  /**
+   * gets the number of usr documents
+   */
 
   async nbUsers() {  
     const userCollection = await this.db.collection("users");
@@ -37,3 +50,5 @@ class DBClient {
 }  
 
 const dbClient = new DBClient();
+
+export default dbClient;
