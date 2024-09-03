@@ -50,7 +50,7 @@ class DBClient {
 
   async nbFiles() {  
     const fileCollection = await this.db.collection("files"); 
-    return fileCollection.countDocuments;
+    return fileCollection.countDocuments();
   }  
 }  
 
