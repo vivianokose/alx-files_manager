@@ -22,7 +22,7 @@ class DBClient {
       }
     });
 
-    this.db = this.client.db(database);
+    this.db = this.client.db(`${database}`);
   }
 
 
@@ -42,6 +42,11 @@ class DBClient {
     const userCollection = await this.db.collection("users");
     return userCollection.countDocuments();
   }  
+
+  /**
+   * gets number of documents in `files` collection
+   * returns {Promise <Number>}
+   */
 
   async nbFiles() {  
     const fileCollection = await this.db.collection("files"); 
