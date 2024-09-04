@@ -4,7 +4,7 @@ import dbClient from '../utils/db';
 import sha1 from 'sha1';
 import { v4 } from 'uuid';
 
-class AuthController{
+export default class AuthController{
 	// Authenticates and login user
 	static async getConnect(req, res){
 		// gets authorization header from the request

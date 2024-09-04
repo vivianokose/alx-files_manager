@@ -1,15 +1,14 @@
 // UsersController.js
 
 import dbClient from '../utils/db';
-import redisClient from '../utils/redus';
-import Queue from 'bull';
+import redisClient from '../utils/redis';
 
 const { ObjectId } = require('mongodb');
 const sha1 = require('sha1');
 
 // UsersController class
 //
-class UsersController{
+export default class UsersController{
 	static async postNew(req, res){
 		const {email, password} = req.body;
 		if (!email) {
