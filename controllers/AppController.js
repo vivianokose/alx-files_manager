@@ -8,7 +8,7 @@ class AppController{
    * AppController
    */
 
-  static async getStatus(req, res){
+  static async getStatus(req, res, next){
     // returns status of redis and db servers
 
     res.status(200).json({
@@ -17,7 +17,7 @@ class AppController{
     });
   }
 
-  static async getStats(req, res){
+  static async getStats(req, res, next){
     res.status(200).json({
       "users": await dbClient.nbUsers(),
       "files": await dbClient.nbFiles(),

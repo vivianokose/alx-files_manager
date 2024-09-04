@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 
 export default class AuthController{
 	// Authenticates and login user
-	static async getConnect(req, res){
+	static async getConnect(req, res, next){
 		// gets authorization header from the request
 		//
 		const authHeader = req.headewrs.authorization;
@@ -39,7 +39,7 @@ export default class AuthController{
 		return res.status(200).json({token});
 	}
 
-	static async getDisconnect(req, res){
+	static async getDisconnect(req, res, next){
 		const authToken = req.headers['X-Token'];
 
 		if (!authToken){

@@ -9,7 +9,7 @@ const sha1 = require('sha1');
 // UsersController class
 //
 export default class UsersController{
-	static async postNew(req, res){
+	static async postNew(req, res, next){
 		const {email, password} = req.body;
 		if (!email) {
 			res.status(400).json({"error": "Missing email"});
@@ -28,7 +28,7 @@ export default class UsersController{
 		res.status(201).json({"id": newUser.insertedId, "email": email});
 	}
 
-	static async getMe(req, res){
+	static async getMe(req, res, next){
 		// extracts toke from header
 		const token = req.headers['X-Token'];
 		if (!token){

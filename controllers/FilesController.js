@@ -6,7 +6,7 @@ import { ObjectId } from 'mongodb';
 
 
 class FilesController{
-	static async postUpload(req, res){
+	static async postUpload(req, res, next){
 		const token = req.headers['X-Token'];
 		if (!token){
 			return res.status(401).json({error: "Unauthorized"});
